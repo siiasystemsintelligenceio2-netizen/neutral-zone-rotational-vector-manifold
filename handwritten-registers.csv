@@ -1,0 +1,48 @@
+page_id line_id raw_text interpretation
+P001 P001 P001 P001 P001 P001 P002 P002 P002 P002 P002 P002 P002 P002 P003 P003 P003 P003 P003 P003 P003 P003 P004 P004 P004 P004 P005 P005 P005 P005 P005 P005 P005 P005 P005 P005 P005 P005
+L001 ↔24→20→0840→V040 L002
+L003 13 13 13 25 209-25 L004 26 20 2.16 L005 46 26 -6
+L006 4 6s / 6666 L001 73761 E6270
+L002 56437 C 24627 => 206460 L003 5C244420
+L004 ↔24→20→0840→V040 L005
+L006 30-28 25 209-25 L007 26 160.2.16 L008 279-12.6-6 L001 73761 E6270
+L002 56437 C 24627 => 206460 L003 5C244420
+L004 ↔24→20→0840→V040 L005
+L006 48 25 209-25 L007 0°060.2.16 L008 2216-12.6-6 L001
+L002 48 25-22
+L003 0°060.2160° L004 2216-12?
+L001 9?7799M↔2945
+L002 7223401242-902 3492 L003 4900777902→2020→40 L004 Z007U
+L005 04W6↔000266 40031 L006 95U↔9?U0
+L007 777376760777-203 L008 40 33 25 23 320 L009 463 20 2.16 L010 22247>6 26-6 L011 L012
+state transition chain 76760760716776 numeric register sequence
+parameter row with difference operation scale/phase row
+output/reduction row four-count six register coded header fragment
+coded transformation fragment coded register fragment state transition chain
+37676716776 numeric register sequence
+parameter row with difference operation uncertain decimal/phase row reduction operation
+coded header fragment
+coded transformation fragment coded register fragment state transition chain
+7876716776 numeric register sequence
+parameter row with difference operation degree/phase row, uncertain reduction operation
+7876740 numeric register sequence
+parameter row with difference operation degree/phase row, uncertain reduction operation, uncertain coded transition, uncertain coded register/difference row state transition chain
+coded register fragment coded transition fragment coded transition, uncertain
+numeric register with reduction suffix parameter row scale/phase row
+transition and reduction row 352 result/checksum candidate 2016 time/version anchor candidate
+1 type
+arrow_map register
+matrix_row matrix_row matrix_row multiplicity
+mixed mixed mixed
+arrow_map register
+matrix_row
+matrix_row_uncertain difference mixed mixed mixed
+arrow_map register
+matrix_row
+matrix_row_uncertain difference
+register matrix_row
+matrix_row_uncertain difference_uncertain mixed_uncertain mixed
+arrow_map mixed mixed
+mixed_uncertain register_difference
+matrix_row matrix_row mixed result
+anchor
