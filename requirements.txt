@@ -1,3 +1,1 @@
-# Core scripts use only Python standard library.
-# Optional development tools:
-pytest>=8.0.0
+# Production: No external runtime dependencies required\n# Core scripts use only Python standard library (3.10+)\n\n# Development and testing (optional):\n# Install with: pip install -e .[dev]\npytest>=8.0.0\npytest-cov>=4.0.0\nmypy>=1.0.0\nblack>=23.0.0\nflake8>=6.0.0\n
