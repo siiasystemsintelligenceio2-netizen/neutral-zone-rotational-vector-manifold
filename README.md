@@ -173,3 +173,20 @@ Add badges only after tests and releases are active:
 ## Safety note
 
 Keep claims technical and testable. Use words like **prototype**, **model**, **hypothesis**, **simulation**, and **bench-scale validation**. Avoid claiming verified propulsion performance until measured data exists.
+
+# Compatibility folder
+
+The user-requested file names are preserved here:
+
+- `tokenizer.py`
+- `registers.py`
+- `matrices.py`
+- `neutral_zone.py`
+
+For actual Python imports, use the safe package path:
+
+```python
+from nzrvm_math.registers import analyze_register
+```
+
+Reason: `math` is also a Python standard-library module, so using `src/math` as an import package can conflict with Python's built-in `math` module.
