@@ -18,7 +18,7 @@ This is a project identifier for internal research organization and authorship t
 
 ## Document Structure
 
-This project maintains a unified documentation system. All related files follow the `PROJECT_SIGNATURE` naming convention with underscores.
+This project maintains a unified documentation system. All related files follow the `PROJECT_SIGNATURE` naming convention with underscores (`_`).
 
 ### Core Technical Specifications
 
@@ -308,16 +308,32 @@ This is a symbolic feature, not yet a validated physical law.
 
 ---
 
+## Related File Deprecation & Consolidation
+
+The following files are consolidated into this document. Direct links are maintained for reference:
+
+| Legacy File | Status | Purpose | Linked To |
+|---|---|---|---|
+| `NRL-01-numeric-registry-layer.md` | Archived | Original NRL-01 specification | [NRL-01: Numeric Register Layer](#nrl-01-numeric-register-layer) |
+| `numeric-register-layer.md` | Archived | Duplicate of NRL-01 specification | [NRL-01: Numeric Register Layer](#nrl-01-numeric-register-layer) |
+| `math-formalization.md` | Archived | Original mathematical models | [Mathematical Formalization](#mathematical-formalization) |
+| `symbol-dictionary.md` | Archived | Original symbol reference | [Symbol Dictionary](#symbol-dictionary) |
+
+**Naming Convention:** All PROJECT_SIGNATURE-related files use underscores (`_`), not hyphens (`-`). This document is the canonical reference.
+
+---
+
 ## Version & Attribution
 
 | Field | Value |
 |---|---|
 | Document | PROJECT_SIGNATURE.md |
-| Version | 1.0 (Consolidated) |
+| Version | 1.1 (Consolidated & Linked) |
 | Date | 2026-06-16 |
 | Organization | AMERICAN EAGLESTAR LLC |
 | Signature | AE-NZRVM-NRL01-ΔPΩ-0001 |
+| Status | Primary master reference; legacy files consolidated |
 
 ---
 
-**Note:** This document consolidates NRL-01-numeric-registry-layer.md, numeric-register-layer.md, math-formalization.md, and symbol-dictionary.md into a single, unified PROJECT_SIGNATURE.md with all cross-references and section anchors properly linked.
+**Note:** This document consolidates NRL-01-numeric-registry-layer.md, numeric-register-layer.md, math-formalization.md, and symbol-dictionary.md into a single, unified PROJECT_SIGNATURE.md. All content is preserved with internal cross-referencing. External references should link to this document.
