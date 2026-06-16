@@ -1,0 +1,200 @@
+{
+  "project": "NZ-RVM + NRL-01",
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "cdb5aa55fa6ec8efbd2878f2aa05717a2f49e3522c532377d2a37b89f8a2fb50",
+      "bytes": 65
+    },
+    {
+      "path": "GITHUB_UPLOAD_INSTRUCTIONS.md",
+      "sha256": "7eb41f382a3a1ffe85dbecba5a0d5e41151d54f3f9c05e8f1186b9d44b907ca8",
+      "bytes": 1617
+    },
+    {
+      "path": "PROJECT_SIGNATURE.md",
+      "sha256": "48e3e761c8f322cfebb1ab56f5536502e3291a3fab6ae90ac4e18d7aa7d12682",
+      "bytes": 329
+    },
+    {
+      "path": "README.md",
+      "sha256": "c04169e8192072951b2ff1e2260c74c0114ddedccca3d314f1e7c3af994538ab",
+      "bytes": 3117
+    },
+    {
+      "path": "assets/originals/31940.png",
+      "sha256": "efeebcd1f3b156ed3ae888e6df3bd958004b164ad70f5e5fc6dceebc24e3be61",
+      "bytes": 118035
+    },
+    {
+      "path": "assets/originals/31943.png",
+      "sha256": "1312d51c82b47cfacbce63633173edb9876f60274b8c87a0e5a64143ec2690b3",
+      "bytes": 119723
+    },
+    {
+      "path": "assets/originals/31944.png",
+      "sha256": "861f908f2813d258781918f1fc0590c0595c9333ac2fbf17f20e7bc2ab9751e3",
+      "bytes": 120129
+    },
+    {
+      "path": "assets/originals/31945.png",
+      "sha256": "f92040a3618bf09ee5df36a40d91b1283ce9ab28da2d8b230b05cae827277142",
+      "bytes": 119109
+    },
+    {
+      "path": "assets/originals/31946.png",
+      "sha256": "47ba69f04fefaece98c628e1cc63f31396b2c769a21b89f32d06f2e618be976e",
+      "bytes": 129241
+    },
+    {
+      "path": "assets/originals/31950.png",
+      "sha256": "7beabb97f3229542e57575459b4286624f7a5f707384fc8a8ff3fd103208428f",
+      "bytes": 115909
+    },
+    {
+      "path": "assets/originals/31950_transforms.jpg",
+      "sha256": "7b882be1586e434edf943b1b3c897daa69bb3601e962c9798556413bbd30765d",
+      "bytes": 244125
+    },
+    {
+      "path": "assets/originals/31952.png",
+      "sha256": "4f8d2bea52c9d98269c50d4ac7c3b6173ce95f97802993eedd875abd6a8352ca",
+      "bytes": 110094
+    },
+    {
+      "path": "assets/originals/31954.png",
+      "sha256": "2c97d78c54c8ff2c194d062f930b548365fbed3eabd8b1b58c284d7f325d8e47",
+      "bytes": 108508
+    },
+    {
+      "path": "assets/originals/31957.png",
+      "sha256": "9ce399c0b8f4bc20b124c29cbb02bd2546660ae7662db2428c7c6bd90e81c32f",
+      "bytes": 107383
+    },
+    {
+      "path": "assets/originals/31960.png",
+      "sha256": "c2b6102c668903ca7b35284d2c63c83229583d5194dbdfbab1f2c16eee7f8561",
+      "bytes": 106087
+    },
+    {
+      "path": "assets/originals/image-1781560161891.jpg",
+      "sha256": "46679b17cbf2083cb1f679c883d19d16a4afd7bbe61cb2d520f1a8dead55ae4b",
+      "bytes": 271430
+    },
+    {
+      "path": "assets/originals/image-1781560178333.jpg",
+      "sha256": "cee9c2d3fc1fe2d6af4c9ca83f84dff2ea9379aa82abe20237398fd0296ab1f8",
+      "bytes": 290005
+    },
+    {
+      "path": "assets/originals/rotated_montage.jpg",
+      "sha256": "caf8197e545e19fc8e738fff441067f44e8d9fe9f5d8dc0b1bda5f59e45a847a",
+      "bytes": 216981
+    },
+    {
+      "path": "data/processed/register-feature-table.csv",
+      "sha256": "475c7020012402d5f6c522c235bd68ebde8a69685289e55acc522db9b4baf440",
+      "bytes": 6435
+    },
+    {
+      "path": "data/raw/handwritten-registers.csv",
+      "sha256": "fd08bfb2a05adddc9dd02cb077a8394d281b196e548e695dac0fc32bc9bee42f",
+      "bytes": 2429
+    },
+    {
+      "path": "docs/handwritten-transcription-log.md",
+      "sha256": "1ded58600f583450ba15744f8ce18a8677a9e29692a35b02982c7994ef542879",
+      "bytes": 1827
+    },
+    {
+      "path": "docs/math-formalization.md",
+      "sha256": "a03ff601fc936a565dfda8e2e89853cfabb9675798f5dc9a7adb835952c8f5f2",
+      "bytes": 2474
+    },
+    {
+      "path": "docs/numeric-register-layer.md",
+      "sha256": "36efcbd31e24e8932f7e2097b40eba8c8d6ccbc8fbddc1756f88d266dc2b952c",
+      "bytes": 1159
+    },
+    {
+      "path": "docs/symbol-dictionary.md",
+      "sha256": "75562926214e77745efca4da84a85d813ff812662f0217081417921e1de17335",
+      "bytes": 2174
+    },
+    {
+      "path": "notebooks/01_numeric_register_analysis.ipynb",
+      "sha256": "3771015a8914e11a84a1c3d7d62e85f78aa9217bb1f3982a7987614772da99e6",
+      "bytes": 1969
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "077e10c403c6f993cd4e905e6e4b2014f6f368b1313dfa3fa833148b22a79f38",
+      "bytes": 93
+    },
+    {
+      "path": "scripts/build_features.py",
+      "sha256": "9fe4dd6a7110f15dad56c92f6bd899ae1a6ad5ccdfcf2e0e370b7d6f95ba2e2c",
+      "bytes": 2166
+    },
+    {
+      "path": "src/math/README.md",
+      "sha256": "b0b52292ec23f99714a39457dca104cfc070f05074c9971036e93e55e40f31d4",
+      "bytes": 415
+    },
+    {
+      "path": "src/math/__init__.py",
+      "sha256": "b23a1a92bd5f9f2a53eb1e16003d8482b732a63d566203382bfb5619dbef4321",
+      "bytes": 35
+    },
+    {
+      "path": "src/math/matrices.py",
+      "sha256": "ac29709f648644e6b1c071e1ff031f608e3e36d90652490a5045d76e8426d956",
+      "bytes": 1539
+    },
+    {
+      "path": "src/math/neutral_zone.py",
+      "sha256": "a1a3d184ac4779b245407441466dfe6a2ea792c2f3fb76be3271467450a390fb",
+      "bytes": 3285
+    },
+    {
+      "path": "src/math/registers.py",
+      "sha256": "880429c9498efa5e34e44b5ec187c0ec9d632ff8c538a320b3e90f129bdd7a5e",
+      "bytes": 3056
+    },
+    {
+      "path": "src/math/tokenizer.py",
+      "sha256": "f260275f3418cadd108eef986a44882f6cda002318094b7536ec52867de2e9f0",
+      "bytes": 1431
+    },
+    {
+      "path": "src/nzrvm_math/__init__.py",
+      "sha256": "3c70c574d357e15b49a3df22fc2e6a38f62ee50fa70448dc94d51df4b9767853",
+      "bytes": 44
+    },
+    {
+      "path": "src/nzrvm_math/matrices.py",
+      "sha256": "ac29709f648644e6b1c071e1ff031f608e3e36d90652490a5045d76e8426d956",
+      "bytes": 1539
+    },
+    {
+      "path": "src/nzrvm_math/neutral_zone.py",
+      "sha256": "a1a3d184ac4779b245407441466dfe6a2ea792c2f3fb76be3271467450a390fb",
+      "bytes": 3285
+    },
+    {
+      "path": "src/nzrvm_math/registers.py",
+      "sha256": "880429c9498efa5e34e44b5ec187c0ec9d632ff8c538a320b3e90f129bdd7a5e",
+      "bytes": 3056
+    },
+    {
+      "path": "src/nzrvm_math/tokenizer.py",
+      "sha256": "f260275f3418cadd108eef986a44882f6cda002318094b7536ec52867de2e9f0",
+      "bytes": 1431
+    },
+    {
+      "path": "tests/test_registers.py",
+      "sha256": "a509efdf46f313adfeeafb62a0ecad26d284f9cbb600f1eddc0b37d136d8b7bd",
+      "bytes": 1052
+    }
+  ]
+}
