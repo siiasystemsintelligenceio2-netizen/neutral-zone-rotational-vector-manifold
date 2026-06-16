@@ -37,6 +37,8 @@ Complete lexicon of symbols, abbreviations, and working expressions.
 
 **Reference:** `PROJECT_SIGNATURE.md#nrl-01-numeric-register-layer`
 
+**Full Spec:** See [Archive Reference](#related-file-deprecation--consolidation) for legacy documents.
+
 ### Purpose
 
 The Numeric Register Layer converts handwritten strings into measurable symbolic objects.
@@ -126,6 +128,8 @@ NRL-01 does not prove the physics. It gives the project a repeatable way to pres
 ## Mathematical Formalization
 
 **Reference:** `PROJECT_SIGNATURE.md#mathematical-formalization`
+
+**Full Spec:** See [Archive Reference](#related-file-deprecation--consolidation) for legacy documents.
 
 ### 1. Physical State Vector
 
@@ -254,6 +258,8 @@ H_i \rightarrow R_i \rightarrow X_i \rightarrow \mathcal{T}_i \rightarrow N_i \r
 
 **Reference:** `PROJECT_SIGNATURE.md#symbol-dictionary`
 
+**Full Spec:** See [Archive Reference](#related-file-deprecation--consolidation) for legacy documents.
+
 | Symbol | Name | Meaning |
 |---|---|---|
 | `NZ-RVM` | Neutral-Zone Rotational Vector Manifold | Main physical model. |
@@ -301,25 +307,63 @@ This is a symbolic feature, not yet a validated physical law.
 
 ## Cross-Reference Index
 
-- **NRL-01 Numeric Register Layer** → Section 1 of Mathematical Formalization (State Vector)
-- **Symbol Dictionary** → Referenced throughout Mathematical Formalization
-- **Arrow Maps & Transformations** → NRL-01 Section 3, Mathematical Formalization Section 7
-- **Rotational Advantage (RA)** → Symbol Dictionary, Mathematical Formalization Section 5
+- **NRL-01 Numeric Register Layer** → [Section 1](#nrl-01-numeric-register-layer)
+- **Mathematical Formalization** → [Section 2](#mathematical-formalization)
+- **Symbol Dictionary** → [Section 3](#symbol-dictionary)
+- **Arrow Maps & Transformations** → NRL-01 [Arrow Maps](#arrow-maps), Mathematical Formalization [Section 7](#7-numeric-register-transformation-pipeline)
+- **Rotational Advantage (RA)** → Symbol Dictionary [Symbol Table](#symbol-dictionary), Mathematical Formalization [Section 5](#5-rotational-advantage)
+- **State Vectors & Control Vectors** → Mathematical Formalization [Sections 1–3](#1-physical-state-vector)
 
 ---
 
 ## Related File Deprecation & Consolidation
 
-The following files are consolidated into this document. Direct links are maintained for reference:
+The following files are archived and consolidated into this `PROJECT_SIGNATURE.md` document. All content has been integrated below; legacy files are retained for backward reference only.
 
-| Legacy File | Status | Purpose | Linked To |
-|---|---|---|---|
-| `NRL-01-numeric-registry-layer.md` | Archived | Original NRL-01 specification | [NRL-01: Numeric Register Layer](#nrl-01-numeric-register-layer) |
-| `numeric-register-layer.md` | Archived | Duplicate of NRL-01 specification | [NRL-01: Numeric Register Layer](#nrl-01-numeric-register-layer) |
-| `math-formalization.md` | Archived | Original mathematical models | [Mathematical Formalization](#mathematical-formalization) |
-| `symbol-dictionary.md` | Archived | Original symbol reference | [Symbol Dictionary](#symbol-dictionary) |
+| Legacy File | Status | Purpose | Linked To | Notes |
+|---|---|---|---|---|
+| `NRL-01-numeric-registry-layer.md` | **Archived** | Original NRL-01 specification | [NRL-01 Section](#nrl-01-numeric-register-layer) | Hyphenated naming; see unified underscore version |
+| `numeric-register-layer.md` | **Archived** | Duplicate of NRL-01 specification | [NRL-01 Section](#nrl-01-numeric-register-layer) | Hyphenated naming; content merged |
+| `math-formalization.md` | **Archived** | Original mathematical models | [Mathematical Formalization Section](#mathematical-formalization) | Hyphenated naming; all formulas consolidated |
+| `symbol-dictionary.md` | **Archived** | Original symbol reference | [Symbol Dictionary Section](#symbol-dictionary) | Hyphenated naming; complete table integrated |
 
-**Naming Convention:** All PROJECT_SIGNATURE-related files use underscores (`_`), not hyphens (`-`). This document is the canonical reference.
+**Naming Convention:** All PROJECT_SIGNATURE-related files use underscores (`_`), not hyphens (`-`). This document is the canonical reference. Legacy hyphenated files remain in the repository for historical reference but should not be updated.
+
+---
+
+## Unified File Structure
+
+```
+neutral-zone-rotational-vector-manifold/
+├── PROJECT_SIGNATURE.md (← CANONICAL MASTER DOCUMENT - THIS FILE)
+├── [Archived] NRL-01-numeric-registry-layer.md (reference only)
+├── [Archived] numeric-register-layer.md (reference only)
+├── [Archived] math-formalization.md (reference only)
+├── [Archived] symbol-dictionary.md (reference only)
+├── README.md (project overview)
+├── DEPRECATED_FILES_MANIFEST.md (tracks legacy files)
+├── hand-written-transcription-log.md (handwritten input records)
+├── symbol-dictionary.md (legacy)
+├── matrices.py (implementation)
+├── neutral_zone.py (implementation)
+├── registers.py (implementation)
+├── tokenizer.py (implementation)
+└── [other implementation files]
+```
+
+---
+
+## How to Navigate & Reference
+
+**For new work:** Always reference `PROJECT_SIGNATURE.md#<section>` using anchor links.
+
+**For specifications:**
+- State vectors and control models → [Mathematical Formalization](#mathematical-formalization)
+- Numeric register definitions → [NRL-01](#nrl-01-numeric-register-layer)
+- Symbol meanings → [Symbol Dictionary](#symbol-dictionary)
+
+**For legacy files:**
+If you find external references to `NRL-01-numeric-registry-layer.md`, `numeric-register-layer.md`, `math-formalization.md`, or `symbol-dictionary.md`, redirect to this document using the anchor links above.
 
 ---
 
@@ -328,12 +372,19 @@ The following files are consolidated into this document. Direct links are mainta
 | Field | Value |
 |---|---|
 | Document | PROJECT_SIGNATURE.md |
-| Version | 1.1 (Consolidated & Linked) |
+| Version | 1.2 (Fully Consolidated & Unified Structure) |
 | Date | 2026-06-16 |
 | Organization | AMERICAN EAGLESTAR LLC |
 | Signature | AE-NZRVM-NRL01-ΔPΩ-0001 |
-| Status | Primary master reference; legacy files consolidated |
+| Status | **PRIMARY MASTER REFERENCE**; all legacy files consolidated |
+| Naming Convention | Underscores (`_`) required; hyphens (`-`) for legacy files only |
 
 ---
 
-**Note:** This document consolidates NRL-01-numeric-registry-layer.md, numeric-register-layer.md, math-formalization.md, and symbol-dictionary.md into a single, unified PROJECT_SIGNATURE.md. All content is preserved with internal cross-referencing. External references should link to this document.
+**Note:** This document consolidates the content of:
+- `NRL-01-numeric-registry-layer.md`
+- `numeric-register-layer.md`
+- `math-formalization.md`
+- `symbol-dictionary.md`
+
+All sections are cross-referenced and anchored for unified navigation. Use the **Cross-Reference Index** and **Symbol Dictionary** to locate specific topics. Legacy files remain archived but are no longer the canonical source.
