@@ -1,0 +1,3 @@
+# Core scripts use only Python standard library.
+# Optional development tools:
+pytest>=8.0.0
