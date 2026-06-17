@@ -48,4 +48,38 @@ community_bridge: # Replace with a single Community Bridge project-name e.g., cl
 liberapay: # Replace with a single Liberapay username
 issuehunt: # Replace with a single IssueHunt username
 otechie: # Replace with a single Otechie username
-custom: # Replace with a single custom sponsorship URL 
+custom: # Replace with a single custom sponsorship URL
+
+# Project Integrity Platform funding configuration for GitHub.
+#
+# GitHub reads this file from .github/FUNDING.yml on the default branch.
+# Replace blank values with your live handles, project names, package names,
+# or up to four custom URLs before publishing.
+#
+# Supported examples:
+# github: [your-org, maintainer-one]
+# patreon: your-patreon-handle
+# open_collective: your-collective
+# ko_fi: yourkofi
+# liberapay: your-liberapay
+# issuehunt: your-issuehunt
+# community_bridge: your-project-name
+# tidelift: npm/your-package
+# polar: your-polar-handle
+# buy_me_a_coffee: your-bmac-handle
+# thanks_dev: u/gh/your-github-username
+# custom: ["https://your-domain.example/support", "https://your-domain.example/sponsor"]
+
+github: []
+patreon:
+open_collective:
+ko_fi:
+liberapay:
+issuehunt:
+community_bridge:
+tidelift:
+polar:
+buy_me_a_coffee:
+thanks_dev:
+custom: []
+
