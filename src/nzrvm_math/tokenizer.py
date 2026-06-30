@@ -1,1 +1,157 @@
-\"\"\"Tokenization utilities for NZ-RVM + NRL-01.\n\nThe tokenizer is intentionally conservative, preserving numbers,\ndecimal fragments, capital letter runs, arrows, and operators.\n\nExample:\n    >>> from nzrvm_math.tokenizer import split_arrow_map, tokenize_register\n    >>> split_arrow_map(\"↔24→20→0840→V040\")\n    ['24', '20', '0840', 'V040']\n    >>> tokenize_register(\"↔24→20→0840→V040\")\n    ['↔', '24', '→', '20', '→', '0840', '→', 'V', '040']\n\"\"\"\n\nfrom __future__ import annotations\n\nimport re\nfrom dataclasses import dataclass\nfrom typing import List\n\nTOKEN_PATTERN = re.compile(\n    r\"\\d+\\.\\d+|\\d+|[A-Z]+|\\u2194|\\u2192|\\u2190|=>|>=|<=|>|<|\\-|\\+|\\u00b0|\\?|\\.|/|'\"\n)\nARROW_PATTERN = re.compile(r\"\\u2194|\\u2192|\\u2190|=>|->|<-\")\n\n\n@dataclass(frozen=True)\nclass TokenizedLine:\n    \"\"\"Result of tokenizing a single line.\n    \n    Attributes:\n        raw: Original input line (unmodified).\n        tokens: List of extracted tokens in order of appearance.\n    \"\"\"\n\n    raw: str\n    tokens: List[str]\n\n\ndef tokenize_register(text: str) -> List[str]:\n    \"\"\"Return a token list from handwritten register text.\n    \n    Extracts: numbers (including decimals), capital letter runs, arrows,\n    and mathematical operators. Preserves order.\n    \n    Args:\n        text: Input string with mixed content (numbers, letters, symbols).\n        \n    Returns:\n        List of tokens extracted from the text in order.\n        Empty list if no tokens found.\n        \n    Raises:\n        TypeError: If text is not a string.\n        \n    Examples:\n        >>> tokenize_register(\"↔24→20→0840→V040\")\n        ['↔', '24', '→', '20', '→', '0840', '→', 'V', '040']\n        >>> tokenize_register(\"12.5 ABC >= 3\")\n        ['12.5', 'ABC', '>=', '3']\n        >>> tokenize_register(\".,.\")\n        ['.', '.']  # Periods are tokens\n    \"\"\"\n    if not isinstance(text, str):\n        raise TypeError(f\"text must be str, got {type(text).__name__}\")\n    return TOKEN_PATTERN.findall(text)\n\n\ndef split_arrow_map(text: str) -> List[str]:\n    \"\"\"Split an arrow-chain expression into ordered state labels.\n    \n    Extracts state names from arrow chains, handling bidirectional\n    (↔), forward (→), and backward (←) arrow notation.\n    Strips leading/trailing bidirectional arrows.\n    \n    Args:\n        text: String containing arrow-separated states.\n        \n    Returns:\n        List of state labels (stripped of whitespace) in order.\n        Empty list if no states found.\n        \n    Raises:\n        TypeError: If text is not a string.\n        \n    Examples:\n        >>> split_arrow_map(\"↔24→20→0840→V040\")\n        ['24', '20', '0840', 'V040']\n        >>> split_arrow_map(\"A → B ← C\")\n        ['A', 'B', 'C']\n        >>> split_arrow_map(\"↔start↔\")\n        ['start']\n    \"\"\"\n    if not isinstance(text, str):\n        raise TypeError(f\"text must be str, got {type(text).__name__}\")\n    cleaned = text.strip().strip(\"↔\")\n    parts = [p.strip() for p in ARROW_PATTERN.split(cleaned) if p.strip()]\n    return parts\n\n\ndef normalize_arrow_text(text: str) -> str:\n    \"\"\"Normalize common handwritten arrow representations to Unicode.\n    \n    Converts various arrow notations to standard Unicode arrows:\n    - '=>' → '→' (forward)\n    - '->' → '→' (forward)\n    - '<-' → '←' (backward)\n    \n    Args:\n        text: String with mixed arrow notations.\n        \n    Returns:\n        String with normalized arrows.\n        \n    Raises:\n        TypeError: If text is not a string.\n        \n    Examples:\n        >>> normalize_arrow_text(\"A => B -> C\")\n        'A → B → C'\n        >>> normalize_arrow_text(\"X <- Y\")\n        'X ← Y'\n    \"\"\"\n    if not isinstance(text, str):\n        raise TypeError(f\"text must be str, got {type(text).__name__}\")\n    return text.replace(\"=>\", \"→\").replace(\"->\", \"→\").replace(\"<-\", \"←\")\n\n\ndef tokenize_lines(lines: list[str]) -> list[TokenizedLine]:\n    \"\"\"Tokenize multiple lines.\n    \n    Applies tokenization to each input line independently.\n    \n    Args:\n        lines: List of input strings to tokenize.\n        \n    Returns:\n        List of TokenizedLine objects, one per input line.\n        \n    Raises:\n        TypeError: If lines is not a list or contains non-strings.\n        \n    Examples:\n        >>> lines = [\"↔24→20\", \"76760760716776\"]\n        >>> results = tokenize_lines(lines)\n        >>> len(results)\n        2\n        >>> results[0].raw\n        '↔24→20'\n        >>> len(results[0].tokens)\n        5  # ['↔', '24', '→', '20']\n    \"\"\"\n    if not isinstance(lines, list):\n        raise TypeError(f\"lines must be list, got {type(lines).__name__}\")\n    return [\n        TokenizedLine(raw=line, tokens=tokenize_register(line))\n        for line in lines\n    ]\n
+"""Tokenization utilities for NZ-RVM + NRL-01.
+
+The tokenizer is intentionally conservative, preserving numbers,
+decimal fragments, capital letter runs, arrows, and operators.
+
+Example:
+    >>> from nzrvm_math.tokenizer import split_arrow_map, tokenize_register
+    >>> split_arrow_map("↔24→20→0840→V040")
+    ['24', '20', '0840', 'V040']
+    >>> tokenize_register("↔24→20→0840→V040")
+    ['↔', '24', '→', '20', '→', '0840', '→', 'V', '040']
+"""
+
+from __future__ import annotations
+
+import re
+from dataclasses import dataclass
+from typing import List
+
+TOKEN_PATTERN = re.compile(
+    r"\d+\.\d+|\d+|[A-Z]+|\u2194|\u2192|\u2190|=>|>=|<=|>|<|\-|\+|\u00b0|\?|\.|/|'"
+)
+ARROW_PATTERN = re.compile(r"\u2194|\u2192|\u2190|=>|->|<-")
+
+
+@dataclass(frozen=True)
+class TokenizedLine:
+    """Result of tokenizing a single line.
+    
+    Attributes:
+        raw: Original input line (unmodified).
+        tokens: List of extracted tokens in order of appearance.
+    """
+
+    raw: str
+    tokens: List[str]
+
+
+def tokenize_register(text: str) -> List[str]:
+    """Return a token list from handwritten register text.
+    
+    Extracts: numbers (including decimals), capital letter runs, arrows,
+    and mathematical operators. Preserves order.
+    
+    Args:
+        text: Input string with mixed content (numbers, letters, symbols).
+        
+    Returns:
+        List of tokens extracted from the text in order.
+        Empty list if no tokens found.
+        
+    Raises:
+        TypeError: If text is not a string.
+        
+    Examples:
+        >>> tokenize_register("↔24→20→0840→V040")
+        ['↔', '24', '→', '20', '→', '0840', '→', 'V', '040']
+        >>> tokenize_register("12.5 ABC >= 3")
+        ['12.5', 'ABC', '>=', '3']
+        >>> tokenize_register(".,.")
+        ['.', '.']  # Periods are tokens
+    """
+    if not isinstance(text, str):
+        raise TypeError(f"text must be str, got {type(text).__name__}")
+    return TOKEN_PATTERN.findall(text)
+
+
+def split_arrow_map(text: str) -> List[str]:
+    """Split an arrow-chain expression into ordered state labels.
+    
+    Extracts state names from arrow chains, handling bidirectional
+    (↔), forward (→), and backward (←) arrow notation.
+    Strips leading/trailing bidirectional arrows.
+    
+    Args:
+        text: String containing arrow-separated states.
+        
+    Returns:
+        List of state labels (stripped of whitespace) in order.
+        Empty list if no states found.
+        
+    Raises:
+        TypeError: If text is not a string.
+        
+    Examples:
+        >>> split_arrow_map("↔24→20→0840→V040")
+        ['24', '20', '0840', 'V040']
+        >>> split_arrow_map("A → B ← C")
+        ['A', 'B', 'C']
+        >>> split_arrow_map("↔start↔")
+        ['start']
+    """
+    if not isinstance(text, str):
+        raise TypeError(f"text must be str, got {type(text).__name__}")
+    cleaned = text.strip().strip("↔")
+    parts = [p.strip() for p in ARROW_PATTERN.split(cleaned) if p.strip()]
+    return parts
+
+
+def normalize_arrow_text(text: str) -> str:
+    """Normalize common handwritten arrow representations to Unicode.
+    
+    Converts various arrow notations to standard Unicode arrows:
+    - '=>' → '→' (forward)
+    - '->' → '→' (forward)
+    - '<-' → '←' (backward)
+    
+    Args:
+        text: String with mixed arrow notations.
+        
+    Returns:
+        String with normalized arrows.
+        
+    Raises:
+        TypeError: If text is not a string.
+        
+    Examples:
+        >>> normalize_arrow_text("A => B -> C")
+        'A → B → C'
+        >>> normalize_arrow_text("X <- Y")
+        'X ← Y'
+    """
+    if not isinstance(text, str):
+        raise TypeError(f"text must be str, got {type(text).__name__}")
+    return text.replace("=>", "→").replace("->", "→").replace("<-", "←")
+
+
+def tokenize_lines(lines: list[str]) -> list[TokenizedLine]:
+    """Tokenize multiple lines.
+    
+    Applies tokenization to each input line independently.
+    
+    Args:
+        lines: List of input strings to tokenize.
+        
+    Returns:
+        List of TokenizedLine objects, one per input line.
+        
+    Raises:
+        TypeError: If lines is not a list or contains non-strings.
+        
+    Examples:
+        >>> lines = ["↔24→20", "76760760716776"]
+        >>> results = tokenize_lines(lines)
+        >>> len(results)
+        2
+        >>> results[0].raw
+        '↔24→20'
+        >>> len(results[0].tokens)
+        5  # ['↔', '24', '→', '20']
+    """
+    if not isinstance(lines, list):
+        raise TypeError(f"lines must be list, got {type(lines).__name__}")
+    return [
+        TokenizedLine(raw=line, tokens=tokenize_register(line))
+        for line in lines
+    ]

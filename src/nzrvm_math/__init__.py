@@ -1,1 +1,90 @@
-\"\"\"Neutral-Zone Rotational Vector Manifold with Numeric Register Layer.\n\nThis package provides mathematical scaffolding for analyzing neutral-zone\nrotational systems and translating handwritten numeric registers into\nanalyzable symbolic objects.\n\nModules:\n    registers: Numeric register analysis and feature extraction.\n    neutral_zone: Physics-based scoring for neutral-zone systems.\n    matrices: Matrix utilities for handwritten numeric data.\n    tokenizer: Tokenization and arrow-chain parsing.\n\nExample:\n    >>> from nzrvm_math.registers import analyze_register\n    >>> features = analyze_register(\"76760760716776\")\n    >>> print(f\"Oscillation: {features.oscillation}\")\n    Oscillation: 28\n\nLicense:\n    GNU Affero General Public License v3.0\n    See LICENSE file for details.\n\"\"\"\n\n__version__ = \"2.0.0\"\n__author__ = \"American Eaglestar LLC\"\n__license__ = \"AGPL-3.0\"\n\nfrom .matrices import (\n    matrix_from_rows,\n    matrix_signature,\n    pad_rows,\n    parse_number_row,\n    row_norm,\n)\nfrom .neutral_zone import (\n    NeutralZoneResult,\n    neutral_stability_score,\n    neutral_zone_condition,\n    rotational_advantage,\n    thrust_from_flow,\n    vector_norm,\n)\nfrom .registers import (\n    RegisterFeatures,\n    analyze_register,\n    difference_expression,\n    digit_frequency,\n    digit_vector,\n    hamming_distance,\n    multiplicity,\n    oscillation_score,\n    symmetry_score,\n    transition_counts,\n)\nfrom .tokenizer import (\n    TokenizedLine,\n    normalize_arrow_text,\n    split_arrow_map,\n    tokenize_lines,\n    tokenize_register,\n)\n\n__all__ = [\n    \"RegisterFeatures\",\n    \"NeutralZoneResult\",\n    \"TokenizedLine\",\n    \"analyze_register\",\n    \"digit_vector\",\n    \"digit_frequency\",\n    \"transition_counts\",\n    \"oscillation_score\",\n    \"symmetry_score\",\n    \"hamming_distance\",\n    \"multiplicity\",\n    \"difference_expression\",\n    \"vector_norm\",\n    \"neutral_stability_score\",\n    \"neutral_zone_condition\",\n    \"rotational_advantage\",\n    \"thrust_from_flow\",\n    \"parse_number_row\",\n    \"pad_rows\",\n    \"matrix_from_rows\",\n    \"row_norm\",\n    \"matrix_signature\",\n    \"tokenize_register\",\n    \"split_arrow_map\",\n    \"normalize_arrow_text\",\n    \"tokenize_lines\",\n]\n
+"""Neutral-Zone Rotational Vector Manifold with Numeric Register Layer.
+
+This package provides mathematical scaffolding for analyzing neutral-zone
+rotational systems and translating handwritten numeric registers into
+analyzable symbolic objects.
+
+Modules:
+    registers: Numeric register analysis and feature extraction.
+    neutral_zone: Physics-based scoring for neutral-zone systems.
+    matrices: Matrix utilities for handwritten numeric data.
+    tokenizer: Tokenization and arrow-chain parsing.
+
+Example:
+    >>> from nzrvm_math.registers import analyze_register
+    >>> features = analyze_register("76760760716776")
+    >>> print(f"Oscillation: {features.oscillation}")
+    Oscillation: 43
+
+License:
+    GNU Affero General Public License v3.0
+    See LICENSE file for details.
+"""
+
+__version__ = "2.0.0"
+__author__ = "American Eaglestar LLC"
+__license__ = "AGPL-3.0"
+
+from .matrices import (
+    matrix_from_rows,
+    matrix_signature,
+    pad_rows,
+    parse_number_row,
+    row_norm,
+)
+from .neutral_zone import (
+    NeutralZoneResult,
+    neutral_stability_score,
+    neutral_zone_condition,
+    rotational_advantage,
+    thrust_from_flow,
+    vector_norm,
+)
+from .registers import (
+    RegisterFeatures,
+    analyze_register,
+    difference_expression,
+    digit_frequency,
+    digit_vector,
+    hamming_distance,
+    multiplicity,
+    oscillation_score,
+    symmetry_score,
+    transition_counts,
+)
+from .tokenizer import (
+    TokenizedLine,
+    normalize_arrow_text,
+    split_arrow_map,
+    tokenize_lines,
+    tokenize_register,
+)
+
+__all__ = [
+    "RegisterFeatures",
+    "NeutralZoneResult",
+    "TokenizedLine",
+    "analyze_register",
+    "digit_vector",
+    "digit_frequency",
+    "transition_counts",
+    "oscillation_score",
+    "symmetry_score",
+    "hamming_distance",
+    "multiplicity",
+    "difference_expression",
+    "vector_norm",
+    "neutral_stability_score",
+    "neutral_zone_condition",
+    "rotational_advantage",
+    "thrust_from_flow",
+    "parse_number_row",
+    "pad_rows",
+    "matrix_from_rows",
+    "row_norm",
+    "matrix_signature",
+    "tokenize_register",
+    "split_arrow_map",
+    "normalize_arrow_text",
+    "tokenize_lines",
+]

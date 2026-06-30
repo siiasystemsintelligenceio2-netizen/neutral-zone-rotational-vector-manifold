@@ -8,7 +8,7 @@ Example:
     >>> from nzrvm_math.registers import analyze_register
     >>> features = analyze_register("76760760716776")
     >>> print(f"Oscillation: {features.oscillation}")
-    Oscillation: 28
+    Oscillation: 43
 """
 
 from __future__ import annotations
@@ -129,8 +129,6 @@ def oscillation_score(sequence: str) -> int:
         
     Examples:
         >>> oscillation_score("7676")
-        2  # |7-6| + |6-7| + |7-6| = 1+1+1 = 3... wait let me recalculate
-        >>> oscillation_score("7676")
         3
     """
     digits = digit_vector(sequence)
@@ -232,7 +230,7 @@ def analyze_register(sequence: str) -> RegisterFeatures:
     Examples:
         >>> features = analyze_register("76760760716776")
         >>> print(f"Length: {features.length}, Oscillation: {features.oscillation}")
-        Length: 14, Oscillation: 28
+        Length: 14, Oscillation: 43
         >>> features.multiplicity_6
         5
     """
@@ -266,4 +264,17 @@ def difference_expression(values: list[float]) -> float:
         TypeError: If values contain non-numeric types.
         
     Examples:
-        >>> difference_expression([279, 12.6, 6])\n        260.4\n        >>> difference_expression([100])\n        100.0\n    \"\"\"\n    if not values:\n        raise ValueError(\"difference_expression requires at least one value\")\n    result = float(values[0])\n    for v in values[1:]:\n        try:\n            result -= float(v)\n        except (TypeError, ValueError) as e:\n            raise TypeError(f\"Cannot convert value to float: {v}\") from e\n    return result\n
+        >>> difference_expression([279, 12.6, 6])
+        260.4
+        >>> difference_expression([100])
+        100.0
+    """
+    if not values:
+        raise ValueError("difference_expression requires at least one value")
+    result = float(values[0])
+    for v in values[1:]:
+        try:
+            result -= float(v)
+        except (TypeError, ValueError) as e:
+            raise TypeError(f"Cannot convert value to float: {v}") from e
+    return result
