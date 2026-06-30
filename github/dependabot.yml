@@ -1,0 +1,64 @@
+version: 2
+
+# Optional: only needed if you use private package indexes (Artifactory, etc.)
+registries:
+  artifactory-pypi:
+    type: python-index
+    url: https://your-artifactory.example.com/api/pypi/pypi/simple
+    username: ${{secrets.MY_ARTIFACTORY_USERNAME}}
+    password: ${{secrets.MY_ARTIFACTORY_PASSWORD}}
+    replaces-base: false
+
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    # If you have multiple Python dependency roots, switch to:
+    # directories: ["/", "/subdir-a", "/subdir-b"]
+    schedule:
+      interval: "weekly"   # daily|weekly|monthly|quarterly|semiannually|yearly|cron
+      day: "monday"
+      time: "06:00"
+      timezone: "America/Los_Angeles"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "python"
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    # Uncomment if this repo needs private registry access:
+    # registries:
+    #   - artifactory-pypi
+    groups:
+      pip-patch-minor:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+          - "minor"
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - "version-update:semver-major"
+    cooldown:
+      semver-patch-days: 3
+      semver-minor-days: 7
+      semver-major-days: 21
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:15"
+      timezone: "America/Los_Angeles"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    groups:
+      actions-all:
+        patterns:
+          - "*"
