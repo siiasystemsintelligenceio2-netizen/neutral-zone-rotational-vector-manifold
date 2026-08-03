@@ -1,1 +1,2 @@
+config
 nzrvm_math

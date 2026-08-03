@@ -1,0 +1,44 @@
+name: Rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+      target_version:
+        description: Artifact version/tag to roll back to
+        required: true
+        type: string
+      reason:
+        description: Why rollback is needed
+        required: true
+        type: string
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup shell scripts
+        run: chmod +x scripts/*.sh
+
+      - name: Execute rollback
+        env:
+          DEPLOY_ENV: ${{ github.event.inputs.environment }}
+          ROLLBACK_TARGET_VERSION: ${{ github.event.inputs.target_version }}
+          ROLLBACK_REASON: ${{ github.event.inputs.reason }}
+          ROLLBACK_COMMAND: ${{ secrets.ROLLBACK_COMMAND }}
+        run: ./scripts/rollback.sh
+
+      - name: Post-rollback smoke test
+        env:
+          SMOKE_TEST_URL: ${{ secrets.POST_ROLLBACK_SMOKE_TEST_URL }}
+        run: ./scripts/smoke-test.sh

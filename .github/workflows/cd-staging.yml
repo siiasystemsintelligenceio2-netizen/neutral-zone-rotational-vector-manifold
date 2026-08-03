@@ -1,0 +1,44 @@
+name: CD Staging
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup shell scripts
+        run: chmod +x scripts/*.sh
+
+      - name: Preflight checks
+        env:
+          DEPLOY_ENV: staging
+          STAGING_DEPLOY_TARGET: ${{ secrets.STAGING_DEPLOY_TARGET }}
+          MIGRATION_COMMAND: ${{ secrets.STAGING_MIGRATION_COMMAND }}
+          SMOKE_TEST_URL: ${{ secrets.STAGING_SMOKE_TEST_URL }}
+        run: ./scripts/preflight-check.sh
+
+      - name: Run migrations
+        env:
+          DEPLOY_ENV: staging
+          MIGRATION_COMMAND: ${{ secrets.STAGING_MIGRATION_COMMAND }}
+        run: ./scripts/migrate.sh
+
+      - name: Deploy to staging
+        env:
+          DEPLOY_ENV: staging
+          STAGING_DEPLOY_TARGET: ${{ secrets.STAGING_DEPLOY_TARGET }}
+          DEPLOY_COMMAND: ${{ secrets.STAGING_DEPLOY_COMMAND }}
+        run: ./scripts/deploy-staging.sh
+
+      - name: Smoke test
+        env:
+          SMOKE_TEST_URL: ${{ secrets.STAGING_SMOKE_TEST_URL }}
+        run: ./scripts/smoke-test.sh

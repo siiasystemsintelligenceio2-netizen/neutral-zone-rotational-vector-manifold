@@ -1,0 +1,46 @@
+name: CD Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_version:
+        description: "Release version/tag to deploy (example: v1.2.3)"
+        required: true
+        type: string
+
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup shell scripts
+        run: chmod +x scripts/*.sh
+
+      - name: Preflight checks
+        env:
+          DEPLOY_ENV: production
+          PRODUCTION_DEPLOY_TARGET: ${{ secrets.PRODUCTION_DEPLOY_TARGET }}
+          MIGRATION_COMMAND: ${{ secrets.PRODUCTION_MIGRATION_COMMAND }}
+        run: ./scripts/preflight-check.sh
+
+      - name: Deploy canary (placeholder)
+        env:
+          DEPLOY_ENV: production
+          RELEASE_VERSION: ${{ github.event.inputs.release_version }}
+          DEPLOY_COMMAND: ${{ secrets.PRODUCTION_CANARY_DEPLOY_COMMAND }}
+        run: ./scripts/deploy-production.sh canary
+
+      - name: Canary smoke test
+        env:
+          SMOKE_TEST_URL: ${{ secrets.PRODUCTION_SMOKE_TEST_URL }}
+        run: ./scripts/smoke-test.sh
+
+      - name: Promote canary to full rollout (placeholder)
+        env:
+          DEPLOY_ENV: production
+          RELEASE_VERSION: ${{ github.event.inputs.release_version }}
+          DEPLOY_COMMAND: ${{ secrets.PRODUCTION_FULL_DEPLOY_COMMAND }}
+        run: ./scripts/deploy-production.sh full
