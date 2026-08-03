@@ -22,7 +22,7 @@ from typing import Dict, List, Tuple
 @dataclass(frozen=True)
 class RegisterFeatures:
     """Complete feature set for a numeric register.
-    
+
     Attributes:
         raw: Original input string.
         digits: List of extracted digit integers.
@@ -48,16 +48,16 @@ class RegisterFeatures:
 
 def digit_vector(sequence: str) -> List[int]:
     """Extract all digits as integers from a handwritten sequence.
-    
+
     Args:
         sequence: String containing digits and other characters.
-        
+
     Returns:
         List of integers extracted from the sequence.
-        
+
     Raises:
         TypeError: If sequence is not a string.
-        
+
     Examples:
         >>> digit_vector("76760760716776")
         [7, 6, 7, 6, 0, 7, 6, 0, 7, 1, 6, 7, 7, 6]
@@ -71,14 +71,14 @@ def digit_vector(sequence: str) -> List[int]:
 
 def digit_frequency(sequence: str) -> Dict[int, float]:
     """Compute digit-frequency distribution for digits 0-9.
-    
+
     Args:
         sequence: String containing digits.
-        
+
     Returns:
         Dict mapping each digit 0-9 to its frequency [0.0, 1.0].
         Frequencies sum to 1.0 or 0.0 if sequence is empty.
-        
+
     Examples:
         >>> freq = digit_frequency("76760760716776")
         >>> freq[6]  # Frequency of digit 6
@@ -97,14 +97,14 @@ def digit_frequency(sequence: str) -> Dict[int, float]:
 
 def transition_counts(sequence: str) -> Dict[Tuple[int, int], int]:
     """Count adjacent digit transitions.
-    
+
     Args:
         sequence: String containing digits.
-        
+
     Returns:
         Dict mapping (from_digit, to_digit) tuple to transition count.
         Empty dict if sequence has fewer than 2 digits.
-        
+
     Examples:
         >>> transitions = transition_counts("7676")
         >>> transitions[(7, 6)]  # Count of 7→6 transitions
@@ -119,14 +119,14 @@ def transition_counts(sequence: str) -> Dict[Tuple[int, int], int]:
 
 def oscillation_score(sequence: str) -> int:
     """Sum absolute adjacent digit changes.
-    
+
     Args:
         sequence: String containing digits.
-        
+
     Returns:
         Sum of absolute differences between consecutive digits.
         Returns 0 if fewer than 2 digits.
-        
+
     Examples:
         >>> oscillation_score("7676")
         3
@@ -139,19 +139,19 @@ def oscillation_score(sequence: str) -> int:
 
 def hamming_distance(a: List[int], b: List[int]) -> int:
     """Hamming distance for equal-length digit vectors.
-    
+
     Counts positions where elements differ.
-    
+
     Args:
         a: First digit vector.
         b: Second digit vector (must be same length).
-        
+
     Returns:
         Count of positions where digits differ.
-        
+
     Raises:
         ValueError: If vectors have different lengths.
-        
+
     Examples:
         >>> hamming_distance([1, 2, 3], [1, 2, 3])
         0
@@ -165,17 +165,17 @@ def hamming_distance(a: List[int], b: List[int]) -> int:
 
 def symmetry_score(sequence: str) -> float:
     """Return mirror symmetry score in [0, 1].
-    
+
     Score of 1.0 means the digit sequence is perfectly symmetric
     (palindromic). Score of 0.0 means completely asymmetric.
-    
+
     Args:
         sequence: String containing digits.
-        
+
     Returns:
         Symmetry score: 1 - (Hamming distance / length).
         Returns 0.0 for empty sequences.
-        
+
     Examples:
         >>> symmetry_score("12321")  # Palindrome
         1.0
@@ -191,17 +191,17 @@ def symmetry_score(sequence: str) -> float:
 
 def multiplicity(sequence: str, digit: int = 6) -> int:
     """Count occurrences of a target digit.
-    
+
     Args:
         sequence: String containing digits.
         digit: Target digit to count (default 6). Must be 0-9.
-        
+
     Returns:
         Count of occurrences of the target digit.
-        
+
     Raises:
         ValueError: If digit is not in [0, 9].
-        
+
     Examples:
         >>> multiplicity("76760760716776", 6)
         5
@@ -215,18 +215,18 @@ def multiplicity(sequence: str, digit: int = 6) -> int:
 
 def analyze_register(sequence: str) -> RegisterFeatures:
     """Compute all core features for one register.
-    
+
     Comprehensive analysis of a handwritten numeric sequence.
-    
+
     Args:
         sequence: String containing numeric register data.
-        
+
     Returns:
         RegisterFeatures dataclass with complete analysis.
-        
+
     Raises:
         TypeError: If sequence is not a string.
-        
+
     Examples:
         >>> features = analyze_register("76760760716776")
         >>> print(f"Length: {features.length}, Oscillation: {features.oscillation}")
@@ -250,19 +250,19 @@ def analyze_register(sequence: str) -> RegisterFeatures:
 
 def difference_expression(values: list[float]) -> float:
     """Evaluate a left-associative subtraction chain from numeric values.
-    
+
     Computes: values[0] - values[1] - values[2] - ... - values[n]
-    
+
     Args:
         values: List of numeric values. Must contain at least one element.
-        
+
     Returns:
         Result of left-associative subtraction.
-        
+
     Raises:
         ValueError: If values list is empty.
         TypeError: If values contain non-numeric types.
-        
+
     Examples:
         >>> difference_expression([279, 12.6, 6])
         260.4

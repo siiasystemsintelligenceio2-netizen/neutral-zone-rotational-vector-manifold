@@ -4,9 +4,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from nzrvm_math.registers import digit_vector, oscillation_score, symmetry_score, difference_expression  # type: ignore
-from nzrvm_math.tokenizer import split_arrow_map  # type: ignore
-from nzrvm_math.neutral_zone import neutral_stability_score, rotational_advantage  # type: ignore
+from nzrvm_math.registers import (  # type: ignore  # noqa: E402
+    difference_expression,
+    digit_vector,
+    oscillation_score,
+    symmetry_score,
+)
+from nzrvm_math.tokenizer import split_arrow_map  # type: ignore  # noqa: E402
+from nzrvm_math.neutral_zone import neutral_stability_score, rotational_advantage  # type: ignore  # noqa: E402
 
 
 def test_digit_vector():

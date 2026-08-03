@@ -84,6 +84,12 @@ def rotational_advantage(
     return (v_norm / (tau_norm + epsilon)) * neutral_score
 
 
-def thrust_from_flow(mass_flow_rate: float, exhaust_velocity: float, pressure_exit: float, pressure_ambient: float, area_exit: float) -> float:
+def thrust_from_flow(
+    mass_flow_rate: float,
+    exhaust_velocity: float,
+    pressure_exit: float,
+    pressure_ambient: float,
+    area_exit: float,
+) -> float:
     """Compute F = mdot*v_e + (p_e - p_a)*A_e."""
     return mass_flow_rate * exhaust_velocity + (pressure_exit - pressure_ambient) * area_exit
