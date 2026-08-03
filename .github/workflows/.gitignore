@@ -1,5 +1,10 @@
-# Created by pytest automatically.
+# Keep this directory clean by default, but allow committed workflow definitions.
 *
-
-# Created by pytest automatically.
-*
+!.gitignore
+!README.md
+!python-package-conda.yml
+!ci.yml
+!security.yml
+!cd-staging.yml
+!cd-production.yml
+!rollback.yml
