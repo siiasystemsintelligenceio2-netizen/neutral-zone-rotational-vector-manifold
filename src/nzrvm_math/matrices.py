@@ -141,6 +141,8 @@ def matrix_signature(matrix: List[List[float]]) -> dict:
     Computes basic properties of a numeric matrix useful for
     characterization and comparison.
 
+    Optimized to accumulate sums in single pass.
+    
     Args:
         matrix: 2D list of numeric values (should be rectangular).
 
@@ -163,11 +165,24 @@ def matrix_signature(matrix: List[List[float]]) -> dict:
         >>> len(sig['row_norms'])
         2
     """
-    flat = [x for row in matrix for x in row]
+    sum_val = 0.0
+    abs_sum_val = 0.0
+    row_norms_list = []
+    
+    # Single pass: accumulate sums and compute row norms
+    for row in matrix:
+        row_norms_list.append(row_norm(row))
+        for x in row:
+            sum_val += x
+            abs_sum_val += abs(x)
+    
+    # Determine column count
+    cols = max((len(row) for row in matrix), default=0) if matrix else 0
+    
     return {
         "rows": len(matrix),
-        "cols": max((len(row) for row in matrix), default=0),
-        "sum": sum(flat),
-        "abs_sum": sum(abs(x) for x in flat),
-        "row_norms": [row_norm(row) for row in matrix],
+        "cols": cols,
+        "sum": sum_val,
+        "abs_sum": abs_sum_val,
+        "row_norms": row_norms_list,
     }

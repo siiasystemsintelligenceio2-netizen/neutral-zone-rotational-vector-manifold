@@ -14,7 +14,6 @@ Example:
 from __future__ import annotations
 
 import re
-from collections import Counter
 from dataclasses import dataclass
 from typing import Dict, List, Tuple
 
@@ -69,6 +68,24 @@ def digit_vector(sequence: str) -> List[int]:
     return [int(d) for d in re.findall(r"\d", sequence)]
 
 
+def _digit_frequency_from_list(digits: List[int]) -> Dict[int, float]:
+    """Compute digit-frequency distribution from pre-extracted digit list.
+    
+    Args:
+        digits: Pre-extracted list of digit integers.
+        
+    Returns:
+        Dict mapping each digit 0-9 to its frequency [0.0, 1.0].
+    """
+    total = len(digits)
+    if total == 0:
+        return {k: 0.0 for k in range(10)}
+    counts: Dict[int, int] = {k: 0 for k in range(10)}
+    for d in digits:
+        counts[d] += 1
+    return {k: counts[k] / total for k in range(10)}
+
+
 def digit_frequency(sequence: str) -> Dict[int, float]:
     """Compute digit-frequency distribution for digits 0-9.
 
@@ -87,12 +104,23 @@ def digit_frequency(sequence: str) -> Dict[int, float]:
         >>> sum(freq.values())
         0.0
     """
-    digits = digit_vector(sequence)
-    total = len(digits)
-    if total == 0:
-        return {k: 0.0 for k in range(10)}
-    counts = Counter(digits)
-    return {k: counts.get(k, 0) / total for k in range(10)}
+    return _digit_frequency_from_list(digit_vector(sequence))
+
+
+def _transition_counts_from_list(digits: List[int]) -> Dict[Tuple[int, int], int]:
+    """Count adjacent digit transitions from pre-extracted digit list.
+    
+    Args:
+        digits: Pre-extracted list of digit integers.
+        
+    Returns:
+        Dict mapping (from_digit, to_digit) to transition count.
+    """
+    transitions: Dict[Tuple[int, int], int] = {}
+    for a, b in zip(digits, digits[1:]):
+        key = (a, b)
+        transitions[key] = transitions.get(key, 0) + 1
+    return transitions
 
 
 def transition_counts(sequence: str) -> Dict[Tuple[int, int], int]:
@@ -110,11 +138,21 @@ def transition_counts(sequence: str) -> Dict[Tuple[int, int], int]:
         >>> transitions[(7, 6)]  # Count of 7→6 transitions
         2
     """
-    digits = digit_vector(sequence)
-    transitions: Counter[Tuple[int, int]] = Counter()
-    for a, b in zip(digits, digits[1:]):
-        transitions[(a, b)] += 1
-    return dict(transitions)
+    return _transition_counts_from_list(digit_vector(sequence))
+
+
+def _oscillation_score_from_list(digits: List[int]) -> int:
+    """Sum absolute adjacent digit changes from pre-extracted digit list.
+    
+    Args:
+        digits: Pre-extracted list of digit integers.
+        
+    Returns:
+        Sum of absolute differences between consecutive digits.
+    """
+    if len(digits) < 2:
+        return 0
+    return sum(abs(digits[i + 1] - digits[i]) for i in range(len(digits) - 1))
 
 
 def oscillation_score(sequence: str) -> int:
@@ -131,10 +169,7 @@ def oscillation_score(sequence: str) -> int:
         >>> oscillation_score("7676")
         3
     """
-    digits = digit_vector(sequence)
-    if len(digits) < 2:
-        return 0
-    return sum(abs(digits[i + 1] - digits[i]) for i in range(len(digits) - 1))
+    return _oscillation_score_from_list(digit_vector(sequence))
 
 
 def hamming_distance(a: List[int], b: List[int]) -> int:
@@ -163,6 +198,21 @@ def hamming_distance(a: List[int], b: List[int]) -> int:
     return sum(x != y for x, y in zip(a, b))
 
 
+def _symmetry_score_from_list(digits: List[int]) -> float:
+    """Return mirror symmetry score from pre-extracted digit list.
+    
+    Args:
+        digits: Pre-extracted list of digit integers.
+        
+    Returns:
+        Symmetry score in [0.0, 1.0].
+    """
+    n = len(digits)
+    if n == 0:
+        return 0.0
+    return 1.0 - hamming_distance(digits, list(reversed(digits))) / n
+
+
 def symmetry_score(sequence: str) -> float:
     """Return mirror symmetry score in [0, 1].
 
@@ -182,11 +232,7 @@ def symmetry_score(sequence: str) -> float:
         >>> symmetry_score("12345")  # Asymmetric
         0.0
     """
-    digits = digit_vector(sequence)
-    n = len(digits)
-    if n == 0:
-        return 0.0
-    return 1.0 - hamming_distance(digits, list(reversed(digits))) / n
+    return _symmetry_score_from_list(digit_vector(sequence))
 
 
 def multiplicity(sequence: str, digit: int = 6) -> int:
@@ -217,7 +263,8 @@ def analyze_register(sequence: str) -> RegisterFeatures:
     """Compute all core features for one register.
 
     Comprehensive analysis of a handwritten numeric sequence.
-
+    Optimized to extract digits only once, reusing the list for all features.
+    
     Args:
         sequence: String containing numeric register data.
 
@@ -235,16 +282,17 @@ def analyze_register(sequence: str) -> RegisterFeatures:
         5
     """
     digits = digit_vector(sequence)
+    
     return RegisterFeatures(
         raw=sequence,
         digits=digits,
         length=len(digits),
         digit_sum=sum(digits),
-        frequency=digit_frequency(sequence),
-        oscillation=oscillation_score(sequence),
-        symmetry=symmetry_score(sequence),
-        transitions=transition_counts(sequence),
-        multiplicity_6=multiplicity(sequence, 6),
+        frequency=_digit_frequency_from_list(digits),
+        oscillation=_oscillation_score_from_list(digits),
+        symmetry=_symmetry_score_from_list(digits),
+        transitions=_transition_counts_from_list(digits),
+        multiplicity_6=digits.count(6),
     )
 
 
