@@ -307,6 +307,12 @@ def test_difference_expression_floats():
     assert round(difference_expression([279, 12.6, 6]), 6) == 260.4
 
 
+def test_scores():
+    assert oscillation_score("76760760716776") > 0
+    assert 0 <= symmetry_score("76760760716776") <= 1
+    sn = neutral_stability_score([0.1, 0.2], [0.05], 1.0, 1.0)
+    assert 0 < sn <= 1
+    assert rotational_advantage([10, 0], [2, 0], sn) > 0
 def test_difference_expression_single():
     """Test single value returns itself."""
     assert difference_expression([100]) == 100.0

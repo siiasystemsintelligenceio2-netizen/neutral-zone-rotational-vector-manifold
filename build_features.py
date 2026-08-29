@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from nzrvm_math.registers import analyze_register  # type: ignore  # local safe package path under src/nzrvm_math
+from nzrvm_math.registers import analyze_register  # type: ignore  # noqa: E402
 
 INPUT = ROOT / "data" / "raw" / "handwritten-registers.csv"
 OUTPUT = ROOT / "data" / "processed" / "register-feature-table.csv"
