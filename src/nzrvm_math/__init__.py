@@ -3,9 +3,9 @@
 
 from __future__ import annotations
 
-# Package metadata (update as needed)
-__version__ = "0.0.0"
-__author__ = "SIIA Systems Intelligence"
+# Package metadata (restored to original values)
+__version__ = "2.0.0"
+__author__ = "American Eaglestar LLC"
 
 # Re-export matrices utilities
 from .matrices import (
